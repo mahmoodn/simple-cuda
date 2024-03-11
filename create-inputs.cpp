@@ -1,13 +1,17 @@
 #include <fstream>
+#include <iostream>
 #include <math.h>
 #include <time.h>
 
-#define N 65636
-
 using namespace std;
 
-int main()
+int main(int argc, char** argv)
 {
+  if (argc != 2) {
+    cout << "Usage: ./create_inputs <number_of_elements>\n";
+    return 1;
+  }
+  int N = stoi(argv[1]);
   srand(time(0));
   ofstream f1("inp1.txt");
   ofstream f2("inp2.txt");
