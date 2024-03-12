@@ -8,40 +8,10 @@
 #include <cassert>
 #include <string>
 #include "cuda_runtime_api.h"
-
-using namespace std;
-
-#define blockSize 128
-
-#define CUDACHECK(cmd) do {                         \
-  cudaError_t err = cmd;                            \
-  if (err != cudaSuccess) {                         \
-    printf("Failed: Cuda error %s:%d '%s'\n",       \
-        __FILE__,__LINE__,cudaGetErrorString(err)); \
-    exit(EXIT_FAILURE);                             \
-  }                                                 \
-} while(0)
+#include "helper.h"
 
 
-// This function prints basic information about the device
-void printInfo()
-{
-  int nDevices;
-  cudaGetDeviceCount(&nDevices);
-  cout << string(50, '-') << endl;
-  for (int i = 0; i < nDevices; i++) {
-    cudaDeviceProp prop;
-    cudaGetDeviceProperties(&prop, i);
-    cout << "Device Number: " << i << endl;
-    cout << "  Device name: " << prop.name << endl;
-    cout << "  SM count: " << prop.multiProcessorCount << endl;
-    cout << "  Max Blocks per SM: " << prop.maxBlocksPerMultiProcessor << endl;
-    cout << "  Max Threads per Block: " << prop.maxThreadsPerBlock << endl;
-    cout << "  Max Threads per SM: " << prop.maxThreadsPerMultiProcessor << endl;
-    assert(blockSize <= prop.maxThreadsPerBlock);
-  }
-  cout << string(50, '-') << endl;
-}
+
 
 // This function reads an input file and copy the data to the host vector
 void readInputFiles(vector<float> &v)
@@ -53,12 +23,19 @@ void readInputFiles(vector<float> &v)
 }
 
 // This helper function prints the final results on the screen
-void print(vector<float> v)
+void print(vector<float> &v)
 {
   for (auto x:v)
     cout << x << " ";
   cout << "\n";
 }
+void print(vector<int> &v)
+{
+  for (auto x:v)
+    cout << x << " ";
+  cout << "\n";
+}
+
 
 // This function allocates the array on device memory and copy inout data from host to device
 // Note that std::vector::data() returns a pointer to the first location of vector, a.k.a hv[0]
@@ -73,7 +50,7 @@ void transferResults(float *&dv, vector<float> &hv, int n)
 {
   hv.resize(n);
   CUDACHECK( cudaMemcpy(hv.data(), dv, n * sizeof(float), cudaMemcpyDeviceToHost) );
-  print(hv);
+  //print(hv);
 }
 
 // This function frees device memory
@@ -107,7 +84,7 @@ int main()
   printInfo();
   vector<float> hostVector;
   readInputFiles(hostVector);
-  cout << "Read " << hostVector.size() << " elements from inp1.txt\n";
+  cout << "Read " << hostVector.size() << " elements from inp1.txt\n\n";
 
   int n = hostVector.size();
   float *deviceVector;
@@ -119,19 +96,21 @@ int main()
   float elapsedTime;
   cudaEventCreate(&start); cudaEventRecord(start,0);
 
-  simpleAdd<<<numBlocks,blockSize>>>(deviceVector, n);
+  simpleAdd<<<numBlocks, blockSize>>>(deviceVector, n);
 
   cudaEventCreate(&stop);  cudaEventRecord(stop,0);
   cudaEventSynchronize(stop);
   cudaEventElapsedTime(&elapsedTime, start,stop);
 
-  cout << "addABC elapsed time : " << elapsedTime << " ms\n";
+  cout << "\naddABC elapsed time : " << elapsedTime << " ms\n";
   cudaDeviceSynchronize();
 
   transferResults(deviceVector, hostVector, n);
   freeMemory(deviceVector);
+  
+  cout << "\nResult:\n";
+  print(hostVector);
 
   cout << "Done\n";
   return 0;
 }
-
