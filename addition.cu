@@ -79,9 +79,15 @@ __global__ void simpleAdd(float *v, int n)
 }
 
     
-int main()
+int main(int argc, char** argv)
 {
-  printInfo();
+  if (argc != 2) {
+    cout << "Usage: ./addition <block_size>\n";
+    return 1;
+  }
+  int blockSize = stoi(argv[1]);
+  printInfo(blockSize);
+  
   vector<float> hostVector;
   readInputFiles(hostVector);
   cout << "Read " << hostVector.size() << " elements from inp1.txt\n\n";
