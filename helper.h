@@ -60,7 +60,7 @@ int _ConvertSMVer2Cores(int major, int minor) {
 }
 
 // This function prints basic information about the device
-void printInfo(int blockSize)
+void printInfo(int &smCount, int blockSize)
 {
   int nDevices;
   cudaGetDeviceCount(&nDevices);
@@ -76,6 +76,54 @@ void printInfo(int blockSize)
     cout << "  Max Threads per Block: " << prop.maxThreadsPerBlock << endl;
     cout << "  Max Threads per SM: " << prop.maxThreadsPerMultiProcessor << endl;
     assert(blockSize <= prop.maxThreadsPerBlock);
+    smCount = prop.multiProcessorCount;
   }
   cout << string(50, '-') << endl;
+}
+
+
+// This function returns the SM number
+__device__ uint get_smid(void) {
+     uint ret;
+     asm("mov.u32 %0, %smid;" : "=r"(ret) );
+     return ret;
+}
+
+// This array is defined on the device memory showing SM indices.
+__device__ int g_smid[68] = {
+  0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0, 0, 0, 0, 0,
+  0, 0, 0, 0
+};
+
+
+// This function prints the SM map
+void printSM(int smCount)
+{
+  int h_smid[smCount];
+  CUDACHECK( cudaMemcpyFromSymbol(h_smid, g_smid, sizeof(h_smid)) );
+  cout << "\nSM map:";
+  for (int i = 0; i < smCount; i++) {
+    if (i % 8 == 0) {
+      cout << "\n" << setw(4) << i << "| ";
+    }
+    cout << setw(6) << h_smid[i];
+  }
+  cout << endl;
+}
+
+
+
+// This helper function prints the final results on the screen
+void print(vector<float> &v)
+{
+  for (auto x:v)
+    cout << x << " ";
+  cout << "\n";
 }
