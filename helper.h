@@ -2,7 +2,6 @@
 #include "cuda_runtime_api.h"
 
 using namespace std;
-#define blockSize 128
 
 
 #define CUDACHECK(cmd) do {                         \
@@ -61,7 +60,7 @@ int _ConvertSMVer2Cores(int major, int minor) {
 }
 
 // This function prints basic information about the device
-void printInfo()
+void printInfo(int blockSize)
 {
   int nDevices;
   cudaGetDeviceCount(&nDevices);
