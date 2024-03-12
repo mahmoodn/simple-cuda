@@ -29,28 +29,37 @@ Device Number: 0
 --------------------------------------------------
 Read 16 elements from inp1.txt
 
-SM(0) Block(0,0,0) Thread(0,0,0) -> 9.45 + 1
-SM(0) Block(0,0,0) Thread(1,0,0) -> 7.97 + 1
-SM(0) Block(0,0,0) Thread(2,0,0) -> 4.75 + 1
-SM(0) Block(0,0,0) Thread(3,0,0) -> 1.24 + 1
-SM(0) Block(0,0,0) Thread(4,0,0) -> -4.10 + 1
-SM(0) Block(0,0,0) Thread(5,0,0) -> -7.91 + 1
-SM(0) Block(0,0,0) Thread(6,0,0) -> 3.03 + 1
-SM(0) Block(0,0,0) Thread(7,0,0) -> 0.80 + 1
-SM(0) Block(0,0,0) Thread(8,0,0) -> 5.59 + 1
-SM(0) Block(0,0,0) Thread(9,0,0) -> 4.20 + 1
-SM(0) Block(0,0,0) Thread(10,0,0) -> 3.82 + 1
-SM(0) Block(0,0,0) Thread(11,0,0) -> -6.93 + 1
-SM(0) Block(0,0,0) Thread(12,0,0) -> 6.32 + 1
-SM(0) Block(0,0,0) Thread(13,0,0) -> 9.97 + 1
-SM(0) Block(0,0,0) Thread(14,0,0) -> 2.16 + 1
-SM(0) Block(0,0,0) Thread(15,0,0) -> -4.94 + 1
+SM(0) | Block(0,0,0) | Thread(0,0,0) | TID(0) -> -9.25 + 1
+SM(0) | Block(0,0,0) | Thread(1,0,0) | TID(1) -> 8.08 + 1
+SM(0) | Block(0,0,0) | Thread(2,0,0) | TID(2) -> 1.30 + 1
+SM(0) | Block(0,0,0) | Thread(3,0,0) | TID(3) -> -6.62 + 1
+SM(0) | Block(0,0,0) | Thread(4,0,0) | TID(4) -> -7.49 + 1
+SM(0) | Block(0,0,0) | Thread(5,0,0) | TID(5) -> 2.22 + 1
+SM(0) | Block(0,0,0) | Thread(6,0,0) | TID(6) -> 2.01 + 1
+SM(0) | Block(0,0,0) | Thread(7,0,0) | TID(7) -> 7.18 + 1
+SM(0) | Block(0,0,0) | Thread(8,0,0) | TID(8) -> -5.34 + 1
+SM(0) | Block(0,0,0) | Thread(9,0,0) | TID(9) -> -2.97 + 1
+SM(0) | Block(0,0,0) | Thread(10,0,0) | TID(10) -> -0.16 + 1
+SM(0) | Block(0,0,0) | Thread(11,0,0) | TID(11) -> 1.12 + 1
+SM(0) | Block(0,0,0) | Thread(12,0,0) | TID(12) -> 6.48 + 1
+SM(0) | Block(0,0,0) | Thread(13,0,0) | TID(13) -> 9.48 + 1
+SM(0) | Block(0,0,0) | Thread(14,0,0) | TID(14) -> -8.82 + 1
+SM(0) | Block(0,0,0) | Thread(15,0,0) | TID(15) -> -1.27 + 1
 
-addABC elapsed time : 0.899072 ms
+addABC elapsed time : 0.912384 ms
 
-Result:
-10.4488 8.9695 5.7455 2.2354 -3.101 -6.9092 4.0279 1.7959 6.5887 5.1981 4.8159 -5.9302 7.3159 10.9748 3.1615 -3.9358 
+SM map:
+   0|     16     0     0     0     0     0     0     0
+   8|      0     0     0     0     0     0     0     0
+  16|      0     0     0     0     0     0     0     0
+  24|      0     0     0     0     0     0     0     0
+  32|      0     0     0     0     0     0     0     0
+  40|      0     0     0     0     0     0     0     0
+  48|      0     0     0     0     0     0     0     0
+  56|      0     0     0     0     0     0     0     0
+  64|      0     0     0     0
 Done
+
 
 
 $ ./addition 8
@@ -65,28 +74,37 @@ Device Number: 0
 --------------------------------------------------
 Read 16 elements from inp1.txt
 
-SM(2) Block(1,0,0) Thread(0,0,0) -> 5.59 + 1
-SM(2) Block(1,0,0) Thread(1,0,0) -> 4.20 + 1
-SM(2) Block(1,0,0) Thread(2,0,0) -> 3.82 + 1
-SM(2) Block(1,0,0) Thread(3,0,0) -> -6.93 + 1
-SM(2) Block(1,0,0) Thread(4,0,0) -> 6.32 + 1
-SM(2) Block(1,0,0) Thread(5,0,0) -> 9.97 + 1
-SM(2) Block(1,0,0) Thread(6,0,0) -> 2.16 + 1
-SM(2) Block(1,0,0) Thread(7,0,0) -> -4.94 + 1
-SM(0) Block(0,0,0) Thread(0,0,0) -> 9.45 + 1
-SM(0) Block(0,0,0) Thread(1,0,0) -> 7.97 + 1
-SM(0) Block(0,0,0) Thread(2,0,0) -> 4.75 + 1
-SM(0) Block(0,0,0) Thread(3,0,0) -> 1.24 + 1
-SM(0) Block(0,0,0) Thread(4,0,0) -> -4.10 + 1
-SM(0) Block(0,0,0) Thread(5,0,0) -> -7.91 + 1
-SM(0) Block(0,0,0) Thread(6,0,0) -> 3.03 + 1
-SM(0) Block(0,0,0) Thread(7,0,0) -> 0.80 + 1
+SM(2) | Block(1,0,0) | Thread(0,0,0) | TID(8) -> -5.34 + 1
+SM(2) | Block(1,0,0) | Thread(1,0,0) | TID(9) -> -2.97 + 1
+SM(2) | Block(1,0,0) | Thread(2,0,0) | TID(10) -> -0.16 + 1
+SM(2) | Block(1,0,0) | Thread(3,0,0) | TID(11) -> 1.12 + 1
+SM(2) | Block(1,0,0) | Thread(4,0,0) | TID(12) -> 6.48 + 1
+SM(2) | Block(1,0,0) | Thread(5,0,0) | TID(13) -> 9.48 + 1
+SM(2) | Block(1,0,0) | Thread(6,0,0) | TID(14) -> -8.82 + 1
+SM(2) | Block(1,0,0) | Thread(7,0,0) | TID(15) -> -1.27 + 1
+SM(0) | Block(0,0,0) | Thread(0,0,0) | TID(0) -> -9.25 + 1
+SM(0) | Block(0,0,0) | Thread(1,0,0) | TID(1) -> 8.08 + 1
+SM(0) | Block(0,0,0) | Thread(2,0,0) | TID(2) -> 1.30 + 1
+SM(0) | Block(0,0,0) | Thread(3,0,0) | TID(3) -> -6.62 + 1
+SM(0) | Block(0,0,0) | Thread(4,0,0) | TID(4) -> -7.49 + 1
+SM(0) | Block(0,0,0) | Thread(5,0,0) | TID(5) -> 2.22 + 1
+SM(0) | Block(0,0,0) | Thread(6,0,0) | TID(6) -> 2.01 + 1
+SM(0) | Block(0,0,0) | Thread(7,0,0) | TID(7) -> 7.18 + 1
 
-addABC elapsed time : 1.21955 ms
+addABC elapsed time : 0.903168 ms
 
-Result:
-10.4488 8.9695 5.7455 2.2354 -3.101 -6.9092 4.0279 1.7959 6.5887 5.1981 4.8159 -5.9302 7.3159 10.9748 3.1615 -3.9358 
+SM map:
+   0|      8     0     8     0     0     0     0     0
+   8|      0     0     0     0     0     0     0     0
+  16|      0     0     0     0     0     0     0     0
+  24|      0     0     0     0     0     0     0     0
+  32|      0     0     0     0     0     0     0     0
+  40|      0     0     0     0     0     0     0     0
+  48|      0     0     0     0     0     0     0     0
+  56|      0     0     0     0     0     0     0     0
+  64|      0     0     0     0
 Done
+
 ```
 
 The above commands read a vector with 32 elements and performs the addition with block sizes of 16 and 8. In the first command, only one block with 16 threads is created and that is offloaded to SM(0). In the second command, two blocks each with 8 threads are created and they are offloaded on SM_0 and SM_2. Note that if you want to compile for a specific architecture you can add `-arch=sm_XX`. See this [page](https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/) to find the corresponding SM number for an architecture.
