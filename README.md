@@ -107,4 +107,56 @@ Done
 
 ```
 
-The above commands read a vector with 32 elements and performs the addition with block sizes of 16 and 8. In the first command, only one block with 16 threads is created and that is offloaded to SM(0). In the second command, two blocks each with 8 threads are created and they are offloaded on SM_0 and SM_2. Note that if you want to compile for a specific architecture you can add `-arch=sm_XX`. See this [page](https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/) to find the corresponding SM number for an architecture.
+The above commands read a vector with 32 elements and performs the addition with block sizes of 16 and 8. In the first command, only one block with 16 threads is created and that is offloaded to SM(0). In the second command, two blocks each with 8 threads are created and they are offloaded on SM_0 and SM_2. Note that if you want to compile for a specific architecture you can add `-arch=sm_XX`. See this [page](https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/) to find the corresponding SM number for an architecture. As another run, the following outputs show the SM usage map for 16K elements with block sizes of 4, 128 and 1024.
+```
+$ ./create_inputs 16384
+$ ./addition 4
+...
+addABC elapsed time : 0.01536 ms
+
+SM map:
+   0|    240   228   240   224   236   228   236   224
+   8|    280   264   268   256   244   224   236   228
+  16|    236   228   240   216   272   276   272   256
+  24|    236   228   232   228   224   228   224   228
+  32|    264   256   284   268   232   228   228   232
+  40|    232   224   232   224   272   276   288   272
+  48|    232   232   228   236   232   224   232   224
+  56|    260   240   276   256   240   216   240   220
+  64|    232   220   232   220
+Done
+
+$ ./addition 128
+...
+addABC elapsed time : 0.012288 ms
+
+SM map:
+   0|    256   256   256   256   256   256   256   256
+   8|    256   256   256   256   256   256   256   256
+  16|    256   256   256   256   256   256   256   256
+  24|    256   256   256   256   256   256   256   256
+  32|    256   256   256   256   256   256   256   256
+  40|    256   256   256   256   256   256   256   256
+  48|    256   256   256   256   256   128   256   128
+  56|    256   128   256   128   256   128   256   128
+  64|    256   128   256   128
+Done
+
+
+$ ./addition 1024
+...
+
+addABC elapsed time : 0.012288 ms
+
+SM map:
+   0|   1024     0  1024     0  1024     0  1024     0
+   8|   1024     0  1024     0  1024     0  1024     0
+  16|   1024     0  1024     0  1024     0  1024     0
+  24|   1024     0  1024     0  1024     0  1024     0
+  32|      0     0     0     0     0     0     0     0
+  40|      0     0     0     0     0     0     0     0
+  48|      0     0     0     0     0     0     0     0
+  56|      0     0     0     0     0     0     0     0
+  64|      0     0     0     0
+
+```
